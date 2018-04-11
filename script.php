@@ -24,7 +24,9 @@
   curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
   $response = curl_exec($ch);
-  var_dump($response);
+  echo $response;
+
+  // var_dump($response);
 
   // echo $actualPath;
   // echo 'hello from angular-php';

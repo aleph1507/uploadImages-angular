@@ -1,3 +1,9 @@
-<p>
-  gallery works!
-</p>
+<div *ngIf="shoulIbeVisible">
+  <h1>Gallery</h1>
+
+  <div>
+    <!-- <img src="https://ucarecdn.com/8b0bf634-df89-4fa4-9e9d-0b3bf374e5b0/-/preview/300x300/" alt=""> -->
+    <!-- https://ucarecdn.com/{{uuid}}/-/preview/300x300/ -->
+    <img src="https://ucarecdn.com/{{uuid}}/-/preview/300x300/">
+  </div>
+</div>

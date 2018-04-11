@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
+
+import {GalleryComponent} from '../gallery/gallery.component';
+
+interface imgPostRes{
+  file: string;
+}
 
 @Component({
   selector: 'app-fileuploader',
@@ -8,6 +14,9 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./fileuploader.component.css']
 })
 export class FileuploaderComponent {
+
+  @Input()
+    gallery: GalleryComponent;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -18,8 +27,11 @@ export class FileuploaderComponent {
       let formData = new FormData();
       formData.append('file', elem.files[0]);
 
-      this.httpClient.post('http://localhost/angular/uploadImages/script.php', formData, { responseType: 'text'})
+      this.httpClient.post<imgPostRes>('http://localhost/angular/uploadImages/script.php',
+          formData, {responseType: 'json'})
         .subscribe((data) => {
+          // let jsonRessponse = data.json();
+          this.gallery.gotSomeDataFromTheBackend(data.file);
           console.log('Got some data from backend', data);
         }, (error) => {
           console.log('Error: ', error);
